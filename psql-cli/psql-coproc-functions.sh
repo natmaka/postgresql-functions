@@ -8,7 +8,7 @@ function psql_coproc
     coproc PSQL { psql "$@" ; }
 }
 
-function get_uuid
+function get_psql_coproc_uuid
 {
     if [ -f /proc/sys/kernel/random/uuid ]; then
 	cat /proc/sys/kernel/random/uuid  # linux-specific
@@ -17,9 +17,10 @@ function get_uuid
     fi
 }
 
+_psql_coproc_uuid=$(get_psql_coproc_uuid)
 function end_marker
 {
-    echo "-- END RESULTS MARK -- $(get_uuid) --"
+    echo "-- END RESULTS MARK -- ${_psql_coproc_uuid} --"
 }
 
 function psql_check_alive
