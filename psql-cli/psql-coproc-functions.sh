@@ -34,22 +34,22 @@ function psql_command
     end=$(end_marker)
 
     psql_check_alive
-    echo "$1"  >&${PSQL[1]}
-    echo "\\echo '$end'" >&${PSQL[1]}
+    echo "$1"  >&"${PSQL[1]}"
+    printf "%s" "\\echo '$end'" >"&${PSQL[1]}"
 
     psql_check_alive
-    while read -r -u ${PSQL[0]} result
+    while read -r -u "${PSQL[0]}" result
     do
-	if [[ $result = $end ]]; then
+	if [[ "$result" = "$end" ]]; then
 	    break
 	fi
-	echo $result
+	echo "$result"
     done
 }
 
 function psql_quit
 {
-    echo '\q' >&${PSQL[1]}
+    echo '\q' >&"${PSQL[1]}"
 }
 
 # Takes a list of queries to run in a transaction
