@@ -12,10 +12,10 @@ source psql-coproc-functions.sh
 
 psql_coproc -AtX -v ON_ERROR_STOP=1 --single-transaction
 
-fifo_names="$(mktemp -u)-$(get_uuid)"
+fifo_names="$(mktemp -u)-$(get_psql_coproc_uuid)"
 mkfifo -m 0600 $fifo_names
 
-fifo_contents="$(mktemp -u)-$(get_uuid)"
+fifo_contents="$(mktemp -u)-$(get_psql_coproc_uuid)"
 mkfifo -m 0600 $fifo_contents
 
 function cleanup

@@ -35,7 +35,7 @@ function psql_command
 
     psql_check_alive
     echo "$1"  >&"${PSQL[1]}"
-    printf "%s" "\\echo '$end'" >"&${PSQL[1]}"
+    printf "%s" "\\echo '$end'" >&"${PSQL[1]}"
 
     psql_check_alive
     while read -r -u "${PSQL[0]}" result
